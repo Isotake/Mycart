@@ -1,0 +1,288 @@
+
+body, ul, li, input, pre {
+    font: 16px/24px Lato, '游ゴシック体', Yu Gothic, YuGothic, 'ヒラギノ角ゴ Pro', Hiragino Kaku Gothic Pro, 'メイリオ', Meiryo, 'ＭＳ Ｐゴシック', MS PGothic, Arial, Verdana, Sans-Serif;
+    color: #000;
+}
+
+a {
+    text-decoration: none;
+}
+a,
+a:hover {
+    color: #000;
+}
+
+.border-black {
+    border-color: #000!important;
+}
+
+/**
+Footer
+ */
+footer {
+
+}
+
+footer .cart-version {
+    width: 100%;
+    padding: 5px 0px;
+}
+
+footer .copy-right {
+    width: 100%;
+    padding: 5px 0px;
+}
+
+/**
+Outline
+ */
+.panel {
+    padding: 2rem;
+    border: solid 1px #000;
+}
+
+/**
+Debug Message
+ */
+.debug-message {
+    margin-top: 2rem;
+    padding: 2rem 4rem;
+    background-color: #000;
+    color: #FFF;
+    text-align: left;
+}
+
+/**
+STEPBAR
+ */
+.stepbar ul, .stepbar li {
+    margin: 0;
+    padding: 0;
+    float: none;
+    display: block;
+}
+.stepbar {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+}
+.step {
+    width: 25%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+.step-header {
+    position: relative;
+    border-bottom: dotted 2px #000;
+}
+.step-header:after {
+    content: '';
+    display: block;
+    position: absolute;
+    right: 0;
+    bottom: -7px;
+    width: 0;
+    height: 0;
+    border-top: solid 6px #FFF;
+    border-right: 0;
+    border-bottom: solid 6px #FFF;
+    border-left: solid 8px #000;
+    background-color: #000;
+    box-sizing: content-box;
+}
+.step-header.current {
+}
+.step-header.current:after {
+}
+.step-content.current {
+    font-weight: bold;
+}
+.step-header.done {
+    border-bottom-style: solid;
+}
+.step-header.done:after {
+}
+.step-content.done {
+}
+
+@media (max-width: 450px) {
+    .stepbar {
+        font-size: 10px;
+    }
+    .step {
+        padding: 10px 0px;
+    }
+}
+
+
+/**
+Cart Error Messages
+ */
+.cart-error-wrapper {
+}
+
+.cart-error {
+    width: 80%;
+    margin: 0 auto 10px;
+}
+
+.cart-error hr {
+    border-color: #000;
+}
+
+.cart-error p {
+    font-size: larger;
+}
+
+/**
+MoreBuy
+ */
+.more-buy-wrapper {
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+    padding: 1rem 8rem;
+    background-image: url('../images/patterns/dot2-2-2.png');
+}
+
+.more-buy {
+    background-color: #FFF;
+}
+
+.more-buy-message {
+}
+
+/**
+submit
+ */
+.submit-wrapper {
+    margin-top: 6rem;
+    margin-bottom: 4rem;
+}
+
+.submit-button {
+    background-color: #000;
+    border-radius: 0;
+    color: #FFF;
+}
+
+/**
+Basket Table
+ */
+.mycart-basket-table thead th,
+.mycart-basket-table th,
+.mycart-basket-table td {
+    border-color: #000;
+}
+
+.mycart-basket-table td {
+    text-align: right;
+}
+
+.item-image-wrapper {
+    margin-right: 1rem;
+    width: 80px;
+}
+
+.item-images {
+    width: 100%;
+}
+
+.item-info-wrapper {
+	text-align: left;
+}
+
+.mark-item {
+	padding: 2px;
+	border: solid 1px #000;
+	font-size: x-small;
+	line-height: 20px;
+}
+
+.mark-reservable {
+
+}
+
+.mark-mail-allowed {
+
+}
+
+input[name="num[]"] {
+	width: 4rem;
+	border: solid 1px #000;
+	font-size: smaller;
+	line-height: 20px;
+	text-align: right;
+}
+
+.basket-buttons {
+    background-color: #000;
+    border-radius: 0;
+    color: #fff;
+    font-size: x-small;
+}
+
+.button_to_add {
+
+}
+
+/**
+STEP2
+ */
+input.usepoint {
+    text-align: right;
+}
+
+/**
+panel-shipping
+ */
+.panel-shipping-heading {
+    margin-bottom: 2rem;
+    font-size: x-large;
+}
+
+.panel-shipping-heading dt {
+    font-weight: normal;
+}
+
+div.panel-address-ok {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    padding-left: 2rem;
+}
+
+table.shipping-method-table td {
+    vertical-align: middle;
+    border-top: 0;
+    font-size: larger;
+}
+
+table.address-shipping-table input {
+
+}
+
+table.address-shipping-table td {
+    vertical-align: middle;
+}
+
+table.address-shipping-table input {
+
+}
+
+div.panel-checkdate {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    padding-left: 2rem;
+}
+
+/**
+panel-payment
+ */
+.panel-payment-heading {
+    margin-bottom: 2rem;
+    font-size: x-large;
+}
+
+.panel-payment-heading dt {
+    font-weight: normal;
+}

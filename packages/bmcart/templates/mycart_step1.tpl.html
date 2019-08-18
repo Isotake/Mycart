@@ -1,0 +1,140 @@
+<?php
+//$tpl['request_cart_error']['shipping'] = 1;
+//$tpl['request_cart_error']['payment'] = 1;
+//$tpl['request_cart_error']['use_point'] = 1;
+//$tpl['request_cart_error']['stock_error']['1']['stock_quantity'] = 10;
+//$tpl['request_cart_error']['stock_error']['1']['basket_quantity'] = 15;
+//$tpl['request_cart_error']['stock_error']['1']['stock_point'] = 150;
+//$tpl['request_cart_error']['stock_error']['1']['basket_point'] = 200;
+//$tpl['request_cart_error']['stock_error']['1']['stock_price'] = 20000;
+//$tpl['request_cart_error']['stock_error']['1']['basket_price'] = 2000;
+?>
+<div class="container">
+	<?= $this->element('debug_display', ["debug_display" => $tpl['debug_display'], "debug_message" => $tpl['debug_message']]) ?>
+	<?= $this->element('stepbar', ['step1' => 'current', 'step2' => '', 'step3' => '', 'step4' => '']) ?>
+	<?php if (isset($tpl['request_cart_error'])) { ?>
+	<div class="row mb-4 cart-error-wrapper">
+		<?php if (isset($tpl['request_cart_error']['shipping'])) { ?>
+		<div class="alert cart-error incorrect_shipping_method">
+            <h3><i class="fas fa-exclamation-triangle"></i> 発送方法を選択してください。</h3>
+		</div>
+		<?php } ?>
+		<?php if (isset($tpl['request_cart_error']['payment'])) { ?>
+		<div class="alert cart-error incorrect_payment_method">
+            <h3><i class="fas fa-exclamation-triangle"></i> 支払方法を選択してください。</h3>
+		</div>
+		<?php } ?>
+		<?php if (isset($tpl['request_cart_error']['usepoint_exceeded_error'])) { ?>
+		<div class="alert cart-error usepoint_exceeded_error">
+            <h3><i class="fas fa-exclamation-triangle"></i> 使用ポイントを確認してください。</h3>
+            <hr>
+            <p>使用できる最大ポイント数を超えている可能性があります。</p>
+            <p>使用できる最大ポイント数が変わった可能性があります。</p>
+		</div>
+		<?php } ?>
+        <?php if (isset($tpl['request_cart_error']['stock_error'])) { ?>
+            <?php foreach ($tpl['request_cart_error']['stock_error'] as $item_id => $error_data) { ?>
+            <div class="alert cart-error stock_error">
+                <h3><i class="fas fa-exclamation-triangle"></i> 商品情報が変更されました。</h3>
+                <hr>
+                <?php if (isset($error_data['basket_quantity'])) { ?>
+                <p>【商品名 <?= $tpl['item_entities'][$item_id]['name'] ?>】 在庫数が変更されました : <?= $error_data['stock_quantity'] ?>点 / 元の点数 : <?= $error_data['basket_quantity'] ?>点</p>
+                <?php } ?>
+                <?php if (isset($error_data['basket_point'])) { ?>
+                <p>【商品名 <?= $tpl['item_entities'][$item_id]['name'] ?>】 ポイント数が変更されました : <?= $error_data['stock_point'] ?>P / 元のポイント数 : <?= $error_data['basket_point'] ?>P</p>
+                <?php } ?>
+                <?php if (isset($error_data['basket_price'])) { ?>
+                <p>【商品名 <?= $tpl['item_entities'][$item_id]['name'] ?>】 商品価格が変更されました : <?= $error_data['stock_price'] ?>円 / 元の商品価格 : <?= $error_data['basket_price'] ?>円</p>
+                <?php } ?>
+            </div>
+            <?php } ?>
+		<?php } ?>
+	</div>
+	<?php } ?>
+
+	<h2>カートの中身</h2>
+	<?= $this->element('mybasket_step1', $tpl) ?>
+
+	<div class="lead more-buy-wrapper mr-auto ml-auto w-75 text-center">
+		<div class="more-buy p-2">
+			<span id="more-buy" class="more-buy-message"><?= $tpl['morebuy_message'] ?></span>
+			<br />
+			<button class="btn" type="button" onclick="alert('使用できません')">買い物を続ける</button>
+		</div>
+	</div>
+
+	<section>
+		<h2>発送方法・お支払いの選択</h2>
+		<div class="panel panel-shipping mb-4">
+			<h5>（1）発送方法</h5>
+			<?php if ($tpl['result_mail_allowed']) { ?>
+			<div class="form-check">
+				<input type="radio" name="shipping_method" id="shipping_yupacket" class="shipping" value="<?= $tpl['shipping_method_ids']['yupacket'] ?>" <?php if ($tpl['shipping_method'] == $tpl['shipping_method_ids']['yupacket']) { echo 'checked="true"'; } ?>/>
+				<label for="shipping_yupacket">
+					ゆうパケット　送料<span id="shipping_yupacket_pr" data-pr="<?= $tpl['result_yupacket_fee'] ?>"><?= $tpl['result_yupacket_fee'] ?></span>円
+				</label>
+				<small>
+					・郵便事故（紛失、漏れなど）の補償がないものとなります。
+				</small>
+			</div>
+			<div class="form-check">
+				<input type="radio" name="shipping_method" id="shipping_nekopos" class="shipping" value="<?= $tpl['shipping_method_ids']['nekopos'] ?>" <?php if ($tpl['shipping_method'] == $tpl['shipping_method_ids']['nekopos']) { echo 'checked=="true"'; } ?> />
+				<label for="shipping_nekopos">
+					ネコポス　送料<span id="shipping_nekopos_pr" data-pr="<?= $tpl['result_nekopos_fee'] ?>"><?= $tpl['result_nekopos_fee'] ?></span>円
+				</label>
+				<small>
+					・郵便事故（紛失、漏れなど）の補償がないものとなります。
+				</small>
+			</div>
+			<?php } ?>
+			<div class="form-check">
+				<input type="radio" name="shipping_method" id="shipping_sagawa" class="shipping" value="<?= $tpl['shipping_method_ids']['sagawa'] ?>" <?php if ($tpl['shipping_method'] == $tpl['shipping_method_ids']['sagawa']) { echo 'checked="true"'; } ?> />
+				<label for="shipping_sagawa">
+					佐川宅配便　送料<span id="shipping_sagawa_pr" data-pr="<?= $tpl['result_sagawa_fee'] ?>"><?= $tpl['result_sagawa_fee'] ?></span>円
+				</label>
+			</div>
+			<div class="form-check">
+				<input type="radio" name="shipping_method" id="shipping_yamato" class="shipping" value="<?= $tpl['shipping_method_ids']['yamato'] ?>" <?php if ($tpl['shipping_method'] == $tpl['shipping_method_ids']['yamato']) { echo 'checked="true"'; } ?> />
+				<label for="shipping_yamato">
+					ヤマト宅急便　送料<span id="shipping_yamato_pr" data-pr="<?= $tpl['result_yamato_fee'] ?>"><?= $tpl['result_yamato_fee'] ?></span>円
+				</label>
+			</div>
+		</div>
+		<div class="panel panel-payment mb-4">
+			<h5>（2）お支払い方法</h5>
+			<div class="form-check">
+				<input type="radio" name="payment_method" id="credit" class="payment" value="<?= $tpl['payment_method_ids']['credit'] ?>" <?php if ($tpl['payment_method'] == $tpl['payment_method_ids']['credit']) { echo 'checked=="true"'; } ?> disabled="true" />
+				<label for="credit">クレジット払い（実装中）</label>
+				<small>
+					・ポイントは付与さされません。
+				</small>
+				<br />
+			</div>
+			<div class="form-check">
+				<input type="radio" name="payment_method" id="cashon" class="payment" value="<?= $tpl['payment_method_ids']['delivery'] ?>" <?php if ($tpl['payment_method'] == $tpl['payment_method_ids']['delivery']) { echo 'checked=="true"'; } ?> />
+				<label for="cashon">
+					代金引換　手数料<span id="cashOnPrice" data-pr="<?= $tpl['delivery_fee'] ?>"><?= $tpl['delivery_fee'] ?></span>円
+				</label>
+			</div>
+			<div class="form-check">
+				<input type="radio" name="payment_method" id="bank" class="payment" value="<?= $tpl['payment_method_ids']['bank'] ?>" <?php if ($tpl['payment_method'] == $tpl['payment_method_ids']['bank']) { echo 'checked=="true"'; } ?> />
+				<label for="bank">
+					銀行振込（三菱東京UFJ・ゆうちょ）
+				</label>
+				<small>
+					・振込手数料はお客様負担となります<br />
+				</small>
+			</div>
+		</div>
+		<div class="submit-wrapper text-center">
+			<form action="bmcart_step2.php" method="get" id="basket_step1">
+				<button type="submit" class="btn submit-button submit-button-step1">この注文で購入手続きする</button>
+			</form>
+			<br />
+			<a href="" target="brank">送料・手数料</a> |
+			<a href="" target="brank">ポイントについて</a> |
+			<a href="" target="brank">お支払方法</a>
+		</div>
+	</section>
+	<?= $this->element('footer', ['cart_version' => $tpl['cart_version']]) ?>
+</div>

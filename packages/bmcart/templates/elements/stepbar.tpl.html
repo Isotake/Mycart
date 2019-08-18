@@ -1,0 +1,39 @@
+<div class="stepbar">
+    <div class="step step-header <?= $tpl['step1'] ?>">
+        <?= ($tpl['step1'] === 'done') ? '<i class="fas fa-check-circle"></i>' : '<i class="far fa-check-circle"></i>' ?> STEP1
+    </div>
+    <div class="step step-header <?= $tpl['step2'] ?>">
+        <?= ($tpl['step2'] === 'done') ? '<i class="fas fa-check-circle"></i>' : '<i class="far fa-check-circle"></i>' ?> STEP2
+    </div>
+    <div class="step step-header <?= $tpl['step3'] ?>">
+        <?= ($tpl['step3'] === 'done') ? '<i class="fas fa-check-circle"></i>' : '<i class="far fa-check-circle"></i>' ?> STEP3
+    </div>
+    <div class="step step-header <?= $tpl['step4'] ?>">
+        <?= ($tpl['step4'] === 'done') ? '<i class="fas fa-check-circle"></i>' : '<i class="far fa-check-circle"></i>' ?> STEP4
+    </div>
+    <div class="step step-content <?= $tpl['step1'] ?>">
+        <ul>
+            <li>カート変更</li>
+            <li>発送方法</li>
+            <li>支払方法</li>
+        </ul>
+    </div>
+    <div class="step step-content <?= $tpl['step2'] ?>">
+        <ul>
+            <li>カート確認</li>
+            <li>ポイント清算</li>
+        </ul>
+    </div>
+    <div class="step step-content <?= $tpl['step3'] ?>">
+        <ul>
+            <li>お届け先</li>
+            <li>お届け指定</li>
+            <li>カード情報</li>
+        </ul>
+    </div>
+    <div class="step step-content <?= $tpl['step4'] ?>">
+        <ul>
+            <li>ご注文完了</li>
+        </ul>
+    </div>
+</div>

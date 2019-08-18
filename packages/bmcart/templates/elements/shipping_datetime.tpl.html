@@ -1,0 +1,29 @@
+<table class="table shipping-datetime-table">
+    <tbody>
+        <tr bgcolor="#FFFFFF">
+            <td>
+                ご希望の配達日
+            </td>
+            <td>
+                <select name="choicedate" id="cm">
+                    <option value="">指定なし</option>
+                    <?php foreach ($tpl['shipping_dates'] as $shipping_date) { ?>
+                    <option value="<?= $shipping_date['option_value'] ?>" <?= ($shipping_date['option_value'] === $tpl['shipping_choicedate']) ? 'selected' : '' ?> ><?= $shipping_date['option_string'] ?></option>
+                    <?php } ?>
+                </select>
+            </td>
+        </tr>
+        <tr bgcolor="#FFFFFF">
+            <td>
+                ご希望の配達時間帯
+            </td>
+            <td>
+                <select name="choicetime" id="select">
+                    <?php foreach ($tpl['shipping_timetable'] as $key => $timetable) { ?>
+                    <option value="<?= $key ?>" <?= ($key === (int)$tpl['shipping_choicetime']) ? 'selected' : '' ?> ><?= $timetable['str_timetable'] ?></option>
+                    <?php } ?>
+                </select>
+            </td>
+        </tr>
+    </tbody>
+</table>

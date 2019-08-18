@@ -1,0 +1,90 @@
+<table class="table credit-table">
+    <tbody>
+        <tr>
+            <td>
+                カード番号
+            </td>
+            <td>
+                <input type="text" name="cardNo" pattern="^[0-9]+$" class="required creditcard" required="" aria-required="true">
+                <small>※ﾊｲﾌﾝ(-)なしの半角数字で入力</small>
+            </td>
+        </tr>
+        <tr bgcolor="#FFFFFF">
+            <td>
+                カード有効期限（Month/Year）
+            </td>
+            <td>
+                <label for="cardValidTermMM">
+                    Month
+                </label>
+                <select name="cardValidTermMM" id="cardValidTermMM" class="required" required="" aria-required="true">
+                    <option value=""></option>
+                    <option value="01">01</option>
+                    <option value="02">02</option>
+                    <option value="03">03</option>
+                    <option value="04">04</option>
+                    <option value="05">05</option>
+                    <option value="06">06</option>
+                    <option value="07">07</option>
+                    <option value="08">08</option>
+                    <option value="09">09</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                </select>
+                 /
+                <label for="cardValidTermYY">
+                    Year
+                </label>
+                <select name="cardValidTermYY" id="cardValidTermYY" class="required" required="" aria-required="true">
+                    <option value=""></option>
+                    <option value="09">2009</option>
+                    <option value="10">2010</option>
+                    <option value="11">2011</option>
+                    <option value="12">2012</option>
+                    <option value="13">2013</option>
+                    <option value="14">2014</option>
+                    <option value="15">2015</option>
+                    <option value="16">2016</option>
+                    <option value="17">2017</option>
+                    <option value="18">2018</option>
+                    <option value="19">2019</option>
+                    <option value="20">2020</option>
+                    <option value="21">2021</option>
+                    <option value="22">2022</option>
+                    <option value="23">2023</option>
+                    <option value="24">2024</option>
+                    <option value="25">2025</option>
+                    <option value="26">2026</option>
+                    <option value="27">2027</option>
+                    <option value="28">2028</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                支払回数
+            </td>
+            <td>
+                <input name="cardpot" type="hidden" value="10" checked="checked">
+                1回払い
+            </td>
+        </tr>
+        <tr>
+            <td>
+                セキュリティコード
+            </td>
+            <td>
+                <input type="text" name="cvc" pattern="^[0-9]+$" class="required" required="" aria-required="true">
+            </td>
+        </tr>
+        <tr bgcolor="#FFFFFF">
+            <td>
+                カード名義
+            </td>
+            <td>
+                <input type="text" name="name" class="required" required="" aria-required="true">
+            </td>
+        </tr>
+    </tbody>
+</table>

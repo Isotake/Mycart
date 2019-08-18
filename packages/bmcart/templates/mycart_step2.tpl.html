@@ -1,0 +1,54 @@
+<div class="container">
+	<?= $this->element('debug_display', ["debug_display" => $tpl['debug_display'], "debug_message" => $tpl['debug_message']]) ?>
+	<?= $this->element('stepbar', ['step1' => 'done', 'step2' => 'current', 'step3' => '', 'step4' => '']) ?>
+    <?php if (isset($tpl['request_cart_error'])) { ?>
+        <div class="row mb-4 cart-error-wrapper">
+            <?php if (isset($tpl['request_cart_error']['no_usage_of_point'])) { ?>
+                <div class="alert cart-error no_usage_of_point">
+                    <h3><i class="fas fa-exclamation-triangle"></i> ポイント使用の可否を設定してください。</h3>
+                </div>
+            <?php } ?>
+        </div>
+    <?php } ?>
+
+	<h2>カートの中身</h2>
+	<?= $this->element('mybasket_step2-4', $tpl) ?>
+
+	<div class="lead more-buy-wrapper mr-auto ml-auto w-75 text-center">
+		<div class="more-buy p-2">
+			<button class="btn" type="button" onclick="location.href = 'bmcart_step1.php'">STEP1に戻る</button>
+		</div>
+	</div>
+
+	<section>
+		<div class="panel panel-payment mb-4">
+			<h5>ポイントの使用</h5>
+			<strong><?= $tpl['user_entity']['username'] ?></strong> さんの現在使用できるポイントは
+            <span id="available_point"><?= $tpl['user_entity']['available_point'] ?></span> <strong>P</strong>です。<br/>
+			<br/>
+			<div class="form-check">
+				<input type="radio" name="ptuse" id="ptuse_no" class="ptuse" value="0" <?php if ($tpl['usage_of_point'] === '0') { echo 'checked="true"'; } ?>/>
+				<label for="ptuse_no">POINTを使用しない</label>
+				<small>
+					・今回のご利用ポイントが加算されます。<br />
+				</small>
+			</div>
+			<div class="form-check">
+				<input type="radio" name="ptuse" id="ptuse_yes" class="ptuse" value="1" <?php if ($tpl['usage_of_point'] === '1') { echo 'checked="true"'; } ?>/>
+				<label for="ptuse_yes">POINTを使用する</label>
+				&nbsp;&nbsp;
+				<input type="text" name="usepoint" id="UsePoint" class="usepoint" value="<?= $tpl['usepoint'] ?>" <?php if ($tpl['usage_of_point'] === '0') { echo 'disabled'; } ?> >P利用する
+			</div>
+		</div>
+		<div class="submit-wrapper text-center">
+			<form action="bmcart_step3.php" method="get" id="formname1">
+				<button type="submit" class="btn submit-button submit-button-step2">購入手続き３に進む</button>
+			</form>
+			<br />
+			<a href="" target="brank">送料・手数料</a> |
+			<a href="" target="brank">ポイントについて</a> |
+			<a href="" target="brank">お支払方法</a>
+		</div>
+	</section>
+	<?= $this->element('footer', ['cart_version' => $tpl['cart_version']]) ?>
+</div>

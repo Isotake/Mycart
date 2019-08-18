@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title><?= $tpl['title'] ?></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../../../css/style.css" />
+    <?= $this->css('custom') ?>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/695a2d1967.js"></script>
+    <?= $this->load_js($tpl['load_js']) ?>
+    <script type="text/javascript">
+        const SHIPPING_YUPACKET_ID = <?= $tpl['shipping_method_ids']['yupacket']; ?>;
+        const SHIPPING_NEKOPOS_ID = <?= $tpl['shipping_method_ids']['nekopos']; ?>;
+        const SHIPPING_SAGAWA_ID = <?= $tpl['shipping_method_ids']['sagawa']; ?>;
+        const SHIPPING_YAMATO_ID = <?= $tpl['shipping_method_ids']['yamato']; ?>;
+        const SHIPPING_YUPACK_ID = <?= $tpl['shipping_method_ids']['yupack']; ?>;
+
+        const PAYMENT_CREDIT_ID = <?= $tpl['payment_method_ids']['credit']; ?>;
+        const PAYMENT_DELIVERY_ID = <?= $tpl['payment_method_ids']['delivery']; ?>;
+        const PAYMENT_BANK_ID = <?= $tpl['payment_method_ids']['bank']; ?>;
+    </script>
+    <?php if ($tpl['custom_js']) { echo $this->custom_js($tpl['custom_js']); } ?>
+</head>
+<body class="<?= $tpl['body_class'] ?>">
+<?= $content ?>
+</body>
+</html>

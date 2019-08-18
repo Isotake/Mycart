@@ -1,0 +1,17 @@
+<div class="container">
+	<?= $this->element('debug_display', ["debug_display" => $tpl['debug_display'], "debug_message" => $tpl['debug_message']]) ?>
+	<?= $this->element('stepbar', ['step1' => 'done', 'step2' => 'done', 'step3' => 'done', 'step4' => 'current']) ?>
+	<h2>カートの中身</h2>
+	<?= $this->element('mybasket_step2-4', $tpl) ?>
+
+	<section>
+		<p class="mt-4 mb-4">
+			御注文ありがとうございます。以下の形で注文の方承りました。<br />
+			<br />
+			ご注文の確認メールを送信しました。<br/>
+			ご注文の状況は、<a href="" target="_brank">マイページ</a>から確認ができます。<br/>
+		</p>
+	</section>
+
+	<?= $this->element('footer', ['cart_version' => $tpl['cart_version']]) ?>
+</div>

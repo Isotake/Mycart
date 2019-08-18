@@ -1,0 +1,127 @@
+<?php
+if ($tpl['payment_method'] === $tpl['payment_method_ids']['credit']) {
+    $paygent_submit_data = 'data-merchant-id="' . $tpl['pagent_merchant_id'] . '" data-generate-key="' . $tpl['pagent_generate_key'] . '"';
+} else {
+    $paygent_submit_data = '';
+}
+
+$prefectures = ["北海道","青森県","岩手県","宮城県","秋田県","山形県","福島県","茨城県","栃木県","群馬県","埼玉県","千葉県","東京都","神奈川県","新潟県","富山県","石川県","福井県","山梨県","長野県","岐阜県","静岡県","愛知県","三重県","滋賀県","京都府","大阪府","兵庫県","奈良県","和歌山県","鳥取県","島根県","岡山県","広島県","山口県","徳島県","香川県","愛媛県","高知県","福岡県","佐賀県","長崎県","熊本県","大分県","宮崎県","鹿児島県","沖縄県"];
+$tpl['prefectures'] = $prefectures;
+
+$week = array( "日", "月", "火", "水", "木", "金", "土" );
+$tpl['shipping_dates'] = [];
+for ( $i = 1 ; $i <= 40 ; $i++) {
+    $option_value = date('Y-m-d', strtotime("+{$i} day"));
+    $weekday = date('w', strtotime("+{$i} day"));
+    $option_string = date('m月d日', strtotime("+{$i} day")) . '(' . $week[$weekday] . ')';
+    $tpl['shipping_dates'][] = [
+        'option_value' => $option_value,
+        'option_string' => $option_string,
+    ];
+}
+
+?>
+<div class="container">
+    <?= $this->element('debug_display', ["debug_display" => $tpl['debug_display'], "debug_message" => $tpl['debug_message']]) ?>
+    <?= $this->element('stepbar', ['step1' => 'done', 'step2' => 'done', 'step3' => 'current', 'step4' => '']) ?>
+
+    <h2>カートの中身</h2>
+    <?= $this->element('mybasket_step2-4', $tpl) ?>
+
+    <div class="lead more-buy-wrapper mr-auto ml-auto w-75 text-center">
+        <div class="more-buy p-2">
+            <button class="btn" type="button" onclick="location.href = 'bmcart_step2.php'">STEP2に戻る</button>
+        </div>
+    </div>
+
+    <section>
+        <h2>発送方法の確認</h2>
+        <div class="panel panel-shipping mb-4">
+
+            <dl class="row panel-shipping-heading">
+                <dt class="col-3">発送方法 : </dt>
+                <dd class="col-9"><?= $tpl['shipping_methods'][$tpl['shipping_method']] ?></dd>
+            </dl>
+
+            <h5>（1）発送先の指定</h5>
+            <div class="panel-address-ok">
+                <div class="form-check mb-1">
+                    <input type="radio" name="address_ok" id="address_ok_0" class="address_ok" value="0" <?= ($tpl['address_ok']) ? '' : 'checked' ?> />
+                    <label for="address_ok_0">
+                        会員登録と同じ
+                    </label>
+                    <small>
+                        ( <?= $tpl['user_entity']['postcode'] ?> <?= $tpl['user_entity']['prefecture'] ?> <?= $tpl['user_entity']['city'] ?> <?= $tpl['user_entity']['town'] ?> <?= $tpl['user_entity']['apartment'] ?> )
+                    </small>
+                </div>
+                <div class="form-check">
+                    <input type="radio" name="address_ok" id="address_ok_1" class="address_ok" value="1" <?= ($tpl['address_ok']) ? 'checked' : '' ?> />
+                    <label for="address_ok_1">
+                        別の住所に配送する
+                    </label>
+                </div>
+            </div>
+            <?= $this->element('address_shipping', $tpl) ?>
+
+            <p>&nbsp;</p>
+
+            <h5>（2）ご希望の配達日時の指定</h5>
+            <?php if (in_array($tpl['shipping_method'], [$tpl['shipping_method_ids']['yupacket'], $tpl['shipping_method_ids']['nekopos']])) { ?>
+            ※ゆうパケット、ネコポスは日時の指定ができません。
+            <?php } else { ?>
+            <div class="panel-checkdate">
+                <div class="form-check mb-1">
+                    <input type="radio" name="cm" id="cm_0" class="cm" value="0" <?= ($tpl['shipping_datetime']) ? '' : 'checked' ?> />
+                    <label for="cm_0">
+                        到着日時の指定をしない
+                    </label>
+                    <small>
+                        ・お急ぎの場合はこちらをご確認ください
+                    </small>
+                </div>
+                <div class="form-check">
+                    <input type="radio" name="cm" id="cm_1" class="cm" value="1" <?= ($tpl['shipping_datetime']) ? 'checked' : '' ?> />
+                    <label for="cm_1">
+                        到着日時の指定をする
+                    </label>
+                </div>
+            </div>
+            <?= $this->element('shipping_datetime', $tpl) ?>
+            <?php } ?>
+        </div>
+        <h2>お支払い方法の確認</h2>
+        <div class="panel panel-payment mb-4">
+
+            <dl class="row panel-payment-heading">
+                <dt class="col-3">お支払い方法 : </dt>
+                <dd class="col-9"><?= $tpl['payment_methods'][$tpl['payment_method']] ?></dd>
+            </dl>
+
+            <?php if ($tpl['payment_method'] == $tpl['payment_method_ids']['credit']) { ?>
+                <h5>カード情報入力</h5>
+                <input type="hidden" name="token" value=""/>
+                <input type="hidden" name="masked_card_number" value=""/>
+                <input type="hidden" name="valid_until" value=""/>
+                <input type="hidden" name="fingerprint" value=""/>
+                <input type="hidden" name="hc" value=""/>
+                <?= $this->element('credit', $tpl) ?>
+            <?php } ?>
+        </div>
+        <h2>その他のご要望</h2>
+        <div class="panel panel-payment mb-4">
+            <div class="form-check">
+                <textarea name="cm_comment" cols="100%" rows="5" id="cm_comment"><?= $tpl['remark'] ?></textarea>
+            </div>
+        </div>
+        <div class="submit-wrapper text-center">
+            <form action="bmcart_step4.php" method="get" id="Shipping">
+                <button type="submit" class="btn submit-button submit-button-step2" <?= $paygent_submit_data ?>>この注文で確定する</button>
+            </form>
+            <br />
+            <a href="" target="brank">送料・手数料</a> |
+            <a href="" target="brank">ポイントについて</a> |
+            <a href="" target="brank">お支払方法</a>
+        </div>
+    </section>
+    <?= $this->element('footer', ['cart_version' => $tpl['cart_version']]) ?>
+</div>

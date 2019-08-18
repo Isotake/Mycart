@@ -1,0 +1,60 @@
+<table class="table address-shipping-table">
+    <tbody>
+        <tr>
+            <td>
+                郵便番号
+            </td>
+            <td>
+                <input maxlength="3" size="3" name="postcode1" id="postcode1" value="<?= $tpl['address_postcode1'] ?>" />
+                -
+                <input maxlength="4" size="4" name="postcode2" id="postcode2" value="<?= $tpl['address_postcode2'] ?>" />
+                <small>（半角英数字 &nbsp;例000-0000）</small>&nbsp;&nbsp;
+            </td>
+        </tr>
+        <tr bgcolor="#FFFFFF">
+            <td>
+                都道府県
+            </td>
+            <td>
+                <select name="prefecture" id="prefecture">
+                    <option value="">-------</option>
+                    <?php foreach ($tpl['prefectures'] as $prefecture) { ?>
+                    <option value="<?= $prefecture ?>" <?= ($tpl['address_prefecture'] === $prefecture) ? 'selected' : '' ?>><?= $prefecture ?></option>
+                    <?php } ?>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                郡区市
+            </td>
+            <td>
+                <input value="<?= $tpl['address_city'] ?>" name="city" id="city" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                町域名
+            </td>
+            <td>
+                <input value="<?= $tpl['address_town'] ?>" name="town" id="town" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                番地
+            </td>
+            <td>
+                <input value="<?= $tpl['address_address'] ?>" name="address" id="address">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                マンション名、アパート名
+            </td>
+            <td>
+                <input value="<?= $tpl['address_apartment'] ?>" name="apartment" id="apartment">
+            </td>
+        </tr>
+    </tbody>
+</table>

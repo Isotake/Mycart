@@ -1,0 +1,17 @@
+{
+    "require": {
+        "illuminate/database": "~5.2.45",
+        "vlucas/phpdotenv": "^3.3",
+        "monolog/monolog": "^1.24",
+        "mobiledetect/mobiledetectlib": "^2.8",
+        "phpunit/phpunit": "~5.7.27",
+        "doctrine/inflector": "1.1.0",
+        "doctrine/instantiator": "1.0.5",
+        "respect/validation": "~1.1.31"
+    },
+	"autoload": {
+		"psr-4": {
+			"Packages\\": "packages/"
+		}
+	}
+}

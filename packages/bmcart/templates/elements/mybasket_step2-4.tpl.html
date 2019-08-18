@@ -1,0 +1,97 @@
+<table class="table table-bordered mycart-basket-table">
+    <thead>
+    <tr>
+        <th scope="col">
+            商品
+        </th>
+        <th scope="col">
+            単価(円)
+        </th>
+        <th scope="col">
+            Point
+        </th>
+        <th scope="col">
+            数量
+        </th>
+        <th scope="col">
+            小計(円)
+        </th>
+        <th scope="col">
+            変更 / 削除
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+        <?php
+            foreach ($tpl['item_entities'] as $item_entity) {
+                $item_id = (int)$item_entity['item_id'];
+                $quantity = $tpl['basket'][$item_id]['quantity'];
+                $subtotal = $item_entity['price'] * $quantity;
+
+                if ($item_entity['is_reserve']) {
+                    $max_limit = $item_entity['reserve_stock'] ;
+                } else {
+                    $max_limit = $item_entity['stock'] ;
+                }
+
+                $img_url = '../../../images/' . $item_entity['filename'];
+        ?>
+        <tr>
+            <td class="basket-items">
+                <div class="d-flex">
+                    <div class="item-image-wrapper">
+                        <img class="item-images" src="<?= $img_url ?>">
+                    </div>
+                    <div>
+                        <span class="item-names"><?= $item_entity['name'] ?></span>
+                        <span class="item-comments">[<?= $item_entity['comment'] ?>]</span><br>
+                        <?= ($item_entity['is_reserve']) ? '<span class="mark-item mark-reservable">予約商品</span>' : '' ?>
+                        <?= ($item_entity['mail_allowed']) ? '<span class="mark-item mark-mail-allowed">メール便可能商品</span>' : '' ?>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <span id="price<?= $item_id ?>" class="price"><?= $item_entity['price'] ?></span>
+            </td>
+            <td>
+                <span id="point<?= $item_id ?>" class="point"><?= $item_entity['point'] ?></span>P
+            </td>
+            <td>
+                <span class="quantity"><?= $quantity ?></span>
+            </td>
+            <td>
+                <span id="subtotal<?= $item_id ?>" class="subtotal"><?= $subtotal ?></span>
+            </td>
+            <td>
+                &nbsp;
+            </td>
+        </tr>
+        <?php } ?>
+        <tr>
+            <th scope="row" colspan="4">送料別小計 →</th>
+            <td>¥<span id="subtotal"><?= $tpl['result_total'] ?></span></td>
+        </tr>
+        <tr>
+            <th scope="row" colspan="4">送料 →</th>
+            <td>¥<span id="excharge"><?= $tpl['excharge'] ?></span></td>
+        </tr>
+        <tr>
+            <th scope="row" colspan="4">ポイント割引 →</th>
+            <td><span id="usepoint"><?= $tpl['usepoint']?></span></td>
+        </tr>
+        <tr>
+            <th scope="row" colspan="2">
+                合計 →
+            </th>
+            <td>
+                <strong><span id="totalpoint"><?= $tpl['result_totalpoint'] ?></span>P</strong>
+            </td>
+            <td>
+                <strong><span id="totalnum"><?= $tpl['result_totalnum'] ?></span>点</strong>
+            </td>
+            <td>
+                <strong>¥<span id="totalprice"><?= $tpl['total_price'] ?></span></strong>
+            </td>
+        </tr>
+    </tbody>
+</table>
