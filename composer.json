@@ -1,6 +1,6 @@
 {
     "require": {
-        "illuminate/database": "~5.2.45",
+        "illuminate/database": "~6.20.26",
         "vlucas/phpdotenv": "^3.3",
         "monolog/monolog": "^1.24",
         "mobiledetect/mobiledetectlib": "^2.8",
